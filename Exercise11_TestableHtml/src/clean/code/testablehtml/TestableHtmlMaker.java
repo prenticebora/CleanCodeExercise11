@@ -13,14 +13,14 @@ public class TestableHtmlMaker {
 	private final PageData pageData;
 	private final boolean isSuiteSetupIncluded;
 	private final WikiPage wikiPage;
-	private final StringBuffer content;
+	private final StringBuffer contentPage;
 	private final PageCrawler pageCrawler;
 
 	public TestableHtmlMaker(PageData pageData, boolean includeSuiteSetup) {
 		this.pageData = pageData;
 		this.isSuiteSetupIncluded = includeSuiteSetup;
 		this.wikiPage = pageData.getWikiPage();
-		this.content = new StringBuffer();
+		this.contentPage = new StringBuffer();
 		this.pageCrawler = wikiPage.getPageCrawler();
 	}
 
@@ -28,11 +28,11 @@ public class TestableHtmlMaker {
 		if (pageData.hasAttribute("Test")) {
 			includeSetup();
 
-			content.append(pageData.getContent());
+			contentPage.append(pageData.getContent());
 
 			includeTeardown();
 
-			pageData.setContent(content.toString());
+			pageData.setContent(contentPage.toString());
 		}
 		return pageData.getHtml();
 	}
@@ -62,7 +62,7 @@ public class TestableHtmlMaker {
 	private void includePage(String mode, WikiPage page) throws Exception {
 		WikiPagePath pagePath = pageCrawler.getFullPath(page);
 		String pagePathName = PathParser.render(pagePath);
-		content.append(String.format("!include -%s .%s\n", mode, pagePathName));
+		contentPage.append(String.format("!include -%s .%s\n", mode, pagePathName));
 	}
 
 }
