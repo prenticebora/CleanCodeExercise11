@@ -15,6 +15,7 @@ public class TestableHtmlMaker {
 	private final WikiPage wikiPage;
 	private final StringBuffer contentPage;
 	private final PageCrawler pageCrawler;
+	
 
 	public TestableHtmlMaker(PageData pageData, boolean includeSuiteSetup) {
 		this.pageData = pageData;
