@@ -16,6 +16,7 @@ public class TestableHtmlMaker {
 	private final StringBuffer content;
 	private final PageCrawler pageCrawler;
 
+	
 	public TestableHtmlMaker(PageData pageData, boolean includeSuiteSetup) {
 		this.pageData = pageData;
 		this.isSuiteSetupIncluded = includeSuiteSetup;
