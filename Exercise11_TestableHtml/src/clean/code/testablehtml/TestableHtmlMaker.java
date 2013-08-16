@@ -18,6 +18,8 @@ public class TestableHtmlMaker {
 
 	private final PageData pageData;
 	private final boolean includeSuiteSetup;
+	private WikiPage wikiPage;
+	private StringBuffer buffer;
 
 	public TestableHtmlMaker(PageData pageData, boolean includeSuiteSetup) {
 		this.pageData = pageData;
@@ -25,8 +27,8 @@ public class TestableHtmlMaker {
 	}
 
 	public String invoke() throws Exception {
-		WikiPage wikiPage = pageData.getWikiPage();
-		StringBuffer buffer = new StringBuffer();
+		wikiPage = pageData.getWikiPage();
+		buffer = new StringBuffer();
 
 		if (pageData.hasAttribute("Test")) {
 			if (includeSuiteSetup) {
