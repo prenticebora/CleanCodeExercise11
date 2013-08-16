@@ -36,14 +36,18 @@ public class TestableHtmlMaker {
 
 		content.append(pageData.getContent());
 		if (pageData.hasAttribute("Test")) {
-			includePage("teardown", "TearDown");
-			if (includeSuiteSetup) {
-				includePage("teardown", SuiteResponder.SUITE_TEARDOWN_NAME);
-			}
+			includeTeardownPage();
 		}
 
 		pageData.setContent(content.toString());
 		return pageData.getHtml();
+	}
+
+	private void includeTeardownPage() throws Exception {
+		includePage("teardown", "TearDown");
+		if (includeSuiteSetup) {
+			includePage("teardown", SuiteResponder.SUITE_TEARDOWN_NAME);
+		}
 	}
 
 	private void includeSetupPage() throws Exception {
