@@ -32,10 +32,9 @@ public class TestableHtmlMaker {
 
 		if (pageData.hasAttribute("Test")) {
 			includeSetupPage();
-		}
 
-		content.append(pageData.getContent());
-		if (pageData.hasAttribute("Test")) {
+			content.append(pageData.getContent());
+
 			includeTeardownPage();
 		}
 
