@@ -19,7 +19,7 @@ public class TestableHtmlMaker {
 	private final PageData pageData;
 	private final boolean includeSuiteSetup;
 	private WikiPage wikiPage;
-	private StringBuffer buffer;
+	private StringBuffer content;
 
 	public TestableHtmlMaker(PageData pageData, boolean includeSuiteSetup) {
 		this.pageData = pageData;
@@ -28,16 +28,13 @@ public class TestableHtmlMaker {
 
 	public String invoke() throws Exception {
 		wikiPage = pageData.getWikiPage();
-		buffer = new StringBuffer();
+		content = new StringBuffer();
 
 		if (pageData.hasAttribute("Test")) {
-			if (includeSuiteSetup) {
-				includePage("setup", SuiteResponder.SUITE_SETUP_NAME);
-			}
-			includePage("setup", "SetUp");
+			includeSetupPage();
 		}
 
-		buffer.append(pageData.getContent());
+		content.append(pageData.getContent());
 		if (pageData.hasAttribute("Test")) {
 			includePage("teardown", "TearDown");
 			if (includeSuiteSetup) {
@@ -45,8 +42,15 @@ public class TestableHtmlMaker {
 			}
 		}
 
-		pageData.setContent(buffer.toString());
+		pageData.setContent(content.toString());
 		return pageData.getHtml();
+	}
+
+	private void includeSetupPage() throws Exception {
+		if (includeSuiteSetup) {
+			includePage("setup", SuiteResponder.SUITE_SETUP_NAME);
+		}
+		includePage("setup", "SetUp");
 	}
 
 	private void includePage(String mode, String suiteTeardownName) throws Exception {
@@ -54,7 +58,7 @@ public class TestableHtmlMaker {
 		if (suiteTeardown != null) {
 			WikiPagePath pagePath = wikiPage.getPageCrawler().getFullPath(suiteTeardown);
 			String pagePathName = PathParser.render(pagePath);
-			buffer.append("!include -" + mode + " .").append(pagePathName).append("\n");
+			content.append("!include -" + mode + " .").append(pagePathName).append("\n");
 		}
 	}
 
