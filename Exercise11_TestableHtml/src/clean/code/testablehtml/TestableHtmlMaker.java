@@ -21,14 +21,14 @@ public class TestableHtmlMaker {
 	private final WikiPage wikiPage;
 	private String content;
 
-	public TestableHtmlMaker(PageData pageData, boolean includeSuiteSetup) {
+	public TestableHtmlMaker(PageData pageData, boolean isSuiteSetupIncluded) {
 		this.pageData = pageData;
-		this.includeSuiteSetup = includeSuiteSetup;
+		this.includeSuiteSetup = isSuiteSetupIncluded;
 		this.wikiPage = pageData.getWikiPage();
 		this.content = "";
 	}
 
-	public String invoke() throws Exception {
+	public String generate() throws Exception {
 
 		if (pageData.hasAttribute("Test")) {
 			content += includeSetupPage();
