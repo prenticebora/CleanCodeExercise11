@@ -36,9 +36,10 @@ public class TestableHtmlMaker {
 			content += pageData.getContent();
 
 			content += includeTeardownPage();
+
+			pageData.setContent(content.toString());
 		}
 
-		pageData.setContent(content.toString());
 		return pageData.getHtml();
 	}
 
