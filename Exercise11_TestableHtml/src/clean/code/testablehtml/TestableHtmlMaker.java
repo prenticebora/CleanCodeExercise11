@@ -32,21 +32,16 @@ public class TestableHtmlMaker {
 
 		if (pageData.hasAttribute("Test")) {
 			if (includeSuiteSetup) {
-				String pageName = SuiteResponder.SUITE_SETUP_NAME;
-
-				includePage("setup", pageName);
+				includePage("setup", SuiteResponder.SUITE_SETUP_NAME);
 			}
-			String string = "SetUp";
-			includePage("setup", string);
+			includePage("setup", "SetUp");
 		}
 
 		buffer.append(pageData.getContent());
 		if (pageData.hasAttribute("Test")) {
-			String string = "TearDown";
-			includePage("teardown", string);
+			includePage("teardown", "TearDown");
 			if (includeSuiteSetup) {
-				String suiteTeardownName = SuiteResponder.SUITE_TEARDOWN_NAME;
-				includePage("teardown", suiteTeardownName);
+				includePage("teardown", SuiteResponder.SUITE_TEARDOWN_NAME);
 			}
 		}
 
